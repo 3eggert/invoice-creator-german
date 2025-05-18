@@ -134,12 +134,12 @@ class CustomerWidget extends StatelessWidget {
                     }),
                     buttonText: "Kunde auswählen",
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   MintYButtonNavigate(
                     route: const InvoiceCreationPage(),
-                    text: Text(
+                    text: const Text(
                       "Speichern",
                       style: MintY.heading5White,
                     ),

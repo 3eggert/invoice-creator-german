@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:invoice/pages/first_start/last_hints.dart';
 import 'package:invoice/widgets/mint_y.dart';
-import 'package:invoice/widgets/setting_widget.dart';
 import 'package:invoice/widgets/template_setting_widget.dart';
 import 'package:invoice/services/template_service.dart';
 

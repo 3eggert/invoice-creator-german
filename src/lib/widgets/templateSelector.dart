@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:invoice/models/template.dart';
 import 'package:invoice/services/template_service.dart';
 import 'package:invoice/widgets/mint_y.dart';
 
@@ -20,8 +19,8 @@ class _TemplateSelectorWidgetState extends State<TemplateSelectorWidget> {
         value: TemplateService.currentTemplate.templateName,
         items: TemplateService.templates
             .map((e) => DropdownMenuItem(
-                  child: Text(e.templateName),
                   value: e.templateName,
+                  child: Text(e.templateName),
                 ))
             .toList(),
         onChanged: (option) {

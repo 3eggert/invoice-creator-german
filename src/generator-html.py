@@ -4,9 +4,11 @@ import sys
 import argparse
 import datetime
 
+print(f'Enter ')
+
 # set merge_pdf_and_xml = True if the prerequisites are met and the combination of pdf and xml is to be activated
 # see near the end of this script
-merge_pdf_and_xml = False
+merge_pdf_and_xml = True
 
 # get a cryptographic timestamp for the generated .pdf and .xml files
 timestamp_invoice = False
@@ -77,6 +79,7 @@ def convert_to_euro_string(template_lines, value):
     
 
 def main():
+    print(f'Enter main()')
     # get home directory
     home = os.path.expanduser("~")
     # create cache directory
@@ -98,7 +101,9 @@ def main():
 
     # If template.csv does not exist, copy the example to the config folder
     if not does_file_exist(f"{config_dir}/template.csv"):
-        os.system("cp {{current_dir}}/html/template.csv.example " + config_dir + "/template.csv")
+        print(f"cur_dir: {current_dir}")
+        print(f"config_dir: {config_dir}")
+        os.system("cp " + current_dir + "/html/template.csv.example " + config_dir + "/template.csv")
 
     # Create the parser
     parser = argparse.ArgumentParser(description='German invoice generator.')
@@ -411,7 +416,7 @@ def main():
     print_path = f"{print_path}/Rechnung-{invoice_number}.pdf"
     if args.dryRun:
         print("Dry run. Not saving the pdf to the invoice Dir.")
-        print_path = f"{cache_dir}/Rechnung.pdf"
+        print_path = f"{cache_dir}/invoice.pdf"
 
     # Check if chromium folder is present next to the script
     chromium_exec = ""
@@ -462,7 +467,7 @@ def main():
     lines.append("          <ram:PostcodeCode>" + sen_zip + "</ram:PostcodeCode>\n")
     lines.append("          <ram:LineOne>" + sen_street + "</ram:LineOne>\n")
     lines.append("          <ram:CityName>" + sen_city + "</ram:CityName>\n")
-    lines.append("          <ram:CountryID></ram:CountryID>\n")
+    lines.append("          <ram:CountryID>DE</ram:CountryID>\n")
     lines.append("        </ram:PostalTradeAddress>\n")
     lines.append("        <ram:SpecifiedTaxRegistration>\n")
     lines.append("          <ram:ID schemeID=\"FC\">" + sen_tax_id + "</ram:ID>\n")
@@ -480,7 +485,7 @@ def main():
     lines.append("      <ram:PostcodeCode>" + args.customerZIP + "</ram:PostcodeCode>\n")
     lines.append("      <ram:LineOne>" + args.customerStreet + "</ram:LineOne>\n")
     lines.append("      <ram:CityName>" + args.customerCity + "</ram:CityName>\n")
-    lines.append("      <ram:CountryID></ram:CountryID>\n")
+    lines.append("      <ram:CountryID>DE</ram:CountryID>\n")
     lines.append("    </ram:PostalTradeAddress>\n")
     lines.append("  </ram:BuyerTradeParty>\n")
 
@@ -618,9 +623,13 @@ def main():
         
         # step 2: convert ps to pdf/a-1 with gs
         os.system(f"gs -dPDFA -dBATCH -dNOPAUSE -sColorConversionStrategy=UseDeviceIndependentColor -sDEVICE=pdfwrite -dPDFACompatibilityPolicy=1 -sOutputFile={cache_dir}/invoice_a.pdf {cache_dir}/invoice.ps")
-        
+        command = "pwd"
+        os.system(command)
+        result = os.popen(command).read()
+        print("Output from command: ---> ", result)
         # step 3: combine pdf/a-1 an xml to one pdf/a-1 file with the mustang library
-        os.system(f"java -Xmx1G -Dfile.encoding=UTF-8 -jar ../mustang-cli/Mustang-CLI-2.15.2.jar --action combine -source {cache_dir}/invoice_a.pdf -source-xml {cache_dir}/invoice.xml -out {cache_dir}/invoice_c.pdf -attachments '' -format zf -version 2 -profile x")
+        #os.system(f"java -Xmx1G -Dfile.encoding=UTF-8 -jar ../mustang-cli/Mustang-CLI-2.15.2.jar --action combine -source {cache_dir}/invoice_a.pdf -source-xml {cache_dir}/invoice.xml -out {cache_dir}/invoice_c.pdf -attachments '' -format zf -version 2 -profile x")
+        os.system(f"java -Xmx1G -Dfile.encoding=UTF-8 -jar ../mustang-cli/Mustang-CLI-2.16.4.jar --action combine -source {cache_dir}/invoice_a.pdf -source-xml {cache_dir}/invoice.xml -out {cache_dir}/invoice_c.pdf -attachments '' -format zf -version 2 -profile x")
 
         # timestamp file
         if timestamp_invoice:

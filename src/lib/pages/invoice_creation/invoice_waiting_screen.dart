@@ -13,7 +13,7 @@ class InvoiceCreationWaitingPage extends StatelessWidget {
         future: creationFunction,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            return InvoiceCreationPage();
+            return const InvoiceCreationPage();
           } else {
             return const MintYLoadingPage(
               text: "Erstelle Rechnung...",

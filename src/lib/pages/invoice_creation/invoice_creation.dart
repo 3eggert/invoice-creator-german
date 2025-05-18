@@ -25,11 +25,11 @@ class InvoiceCreationPage extends StatelessWidget {
     return MintYPage(
       title: "Rechnung erstellen",
       centerContentElements: false,
-      headerContentRight: Row(
+      headerContentRight: const Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text("Vorlage:", style: MintY.heading3White),
-          const Padding(
+          Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.0),
             child: TemplateSelectorWidget(),
           ),
@@ -37,7 +37,7 @@ class InvoiceCreationPage extends StatelessWidget {
       ),
       contentElements: [
         InvoiceBaseSettings(),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         Row(
@@ -62,7 +62,7 @@ class InvoiceCreationPage extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         Row(
@@ -76,7 +76,7 @@ class InvoiceCreationPage extends StatelessWidget {
             ),
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.7 - 20,
-              child: InvoiceElementCreationWidget(),
+              child: const InvoiceElementCreationWidget(),
             ),
           ],
         ),
@@ -106,13 +106,13 @@ class InvoiceCreationPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: MintYButton(
-                  text: Text(
+                  text: const Text(
                     "Rechnungs-Ordner öffnen",
                     style: MintY.heading4White,
                   ),
                   color: MintY.currentColor,
                   onPressed: () {
-                    Process.run("xdg-open", ["${getInvoicesDirectory()}"]);
+                    Process.run("xdg-open", [(getInvoicesDirectory())]);
                   },
                 ),
               ),
@@ -122,7 +122,7 @@ class InvoiceCreationPage extends StatelessWidget {
             children: [
               MintYButton(
                 height: 50,
-                text: Text(
+                text: const Text(
                   "Vorschau",
                   style: MintY.heading3,
                 ),
@@ -130,7 +130,7 @@ class InvoiceCreationPage extends StatelessWidget {
                 onPressed: () => InvoiceService.generateInvoice(
                     preview: true, context: context),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               MintYButton(
@@ -316,7 +316,7 @@ class InvoiceElementTableWidgetState extends State<InvoiceElementTableWidget> {
 }
 
 class InvoiceElementCreationWidget extends StatelessWidget {
-  InvoiceElementCreationWidget({super.key});
+  const InvoiceElementCreationWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -346,7 +346,7 @@ class DiscountCreationWidget extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Row(
           children: [
-            Container(
+            SizedBox(
               width: 250,
               child: Text(
                 "Neuer Rabatt",
@@ -374,9 +374,9 @@ class DiscountCreationWidget extends StatelessWidget {
               controller: discountPriceController,
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: MintYButton(
-                text: Icon(
+                text: const Icon(
                   Icons.add,
                   color: Colors.white,
                 ),
@@ -435,7 +435,7 @@ class ArticleCreationWidget extends StatelessWidget {
         child: FocusScope(
           child: Row(
             children: [
-              Container(
+              SizedBox(
                 width: 250,
                 child: Text(
                   "Artikel",
@@ -522,11 +522,11 @@ class ArticleCreationWidget extends StatelessWidget {
                           }),
                           buttonText: "Artikel auswählen",
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                         MintYButtonNavigate(
-                          route: InvoiceCreationPage(),
+                          route: const InvoiceCreationPage(),
                           text: const Text(
                             "Artikel speichern",
                             style: MintY.heading5White,
@@ -563,9 +563,9 @@ class ArticleCreationWidget extends StatelessWidget {
                         controller: articleAmountController,
                       ),
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: MintYButton(
-                          text: Icon(
+                          text: const Icon(
                             Icons.add,
                             color: Colors.white,
                           ),
@@ -599,7 +599,7 @@ class ArticleCreationWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 140,
                   ),
                 ],

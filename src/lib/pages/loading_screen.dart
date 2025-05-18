@@ -28,12 +28,12 @@ class LoadingScreenPage extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.data == false) {
-            return FirstStartPage();
+            return const FirstStartPage();
           } else {
-            return InvoiceCreationPage();
+            return const InvoiceCreationPage();
           }
         } else {
-          return MintYLoadingPage(
+          return const MintYLoadingPage(
             text: "Lade Daten...",
           );
         }

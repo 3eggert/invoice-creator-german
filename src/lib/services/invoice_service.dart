@@ -136,8 +136,8 @@ class InvoiceService {
       }
     }
 
-    // print(result.stdout);
-    // print(result.stderr);
+    print(result.stdout);
+    print(result.stderr);
 
     // Get current month and year
     var now = DateTime.now();
@@ -145,7 +145,7 @@ class InvoiceService {
     String year = now.year.toString();
 
     if (preview) {
-      Process.run("xdg-open", ["${getCacheDirectory()}/Rechnung.pdf"]);
+      Process.run("xdg-open", ["${getCacheDirectory()}/invoice.pdf"]);
     } else {
       if (opendInvoiceFolder == false) {
         opendInvoiceFolder = true;

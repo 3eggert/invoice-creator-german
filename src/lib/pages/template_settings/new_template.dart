@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:invoice/models/template.dart';
 import 'package:invoice/pages/template_settings/template_settings.dart';
 import 'package:invoice/services/template_service.dart';
 import 'package:invoice/widgets/mint_y.dart';
